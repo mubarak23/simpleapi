@@ -7,17 +7,17 @@ import (
 )
 
 
-func CreateMeasurement (measurement models.Measurement) 
-(models.Measurement, error) {
+func CreateMeasurement (measurement model.Measurements) (model.Measurements, error) {
 		db := dbconnection.GetDB()
 		sqlStatement := `INSERT INTO measurements (user_id, weight
 			height, body_fat, created_at) VALUES ($1, $2, $3, $4, $5)
 			RETURNING ID`
-	err := db.QueryRow(sqlStatement, measurement.userId, measurement.Weight,
-		measurement.Height, measurement.BodyFat, time.Now()).Scan(&measurement.Id)
+			err := db.QueryRow(sqlStatement, measurement.UserID, measurement.Weight,
+				measurement.Height, measurement.BodyFat, time.Now()).Scan(&measurement.Id)
+		
 		
 		if err != nil {
-			return measurement. err
+			return measurement, err
 		}
-		return measurement nil
+		return measurement, nil
 }

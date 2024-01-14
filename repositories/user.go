@@ -6,10 +6,10 @@ import (
 )
 
 
-func CreateUser (user models.User) (models.User, error) {
+func CreateUser (user model.User) (model.User, error) {
 	db := dbconnection.GetDB()
 	sqlStatement := `INSERT INTO users (name, email, password) 
-		VALUE ($1, $2, $3) RETURNING id`
+		VALUES ($1, $2, $3) RETURNING id`
 	
 	err := db.QueryRow(sqlStatement, user.Name, user.Email, user.Password ).Scan(&user.Id)
 
