@@ -16,7 +16,10 @@ func main() {
 
 	 // Create a User routes
 	e.POST("/users", handlers.CreateUser)
+	e.POST("/measurement", handlers.CreateMeasurement)
 
+	// create user measurment
+	// e.POST("/measurement", handlers.CreateUserMeasurement)
 	
 	 e.Logger.Fatal(e.Start(":8085"))
 }
