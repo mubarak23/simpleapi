@@ -3,6 +3,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"simplefitapi/handlers"
 	"simplefitapi/dbconnection"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
@@ -10,6 +11,12 @@ func main() {
 
 	  // connect to the db 
 		dbconnection.InitDb()
+
+		// custom middleware 
+		e.Use(handlers.LogRequest)
+
+		// echo middleware
+		e.Use(middleware.Logger())
 
 	 // create our first routes
 	 e.GET("/", handlers.Home)

@@ -33,3 +33,11 @@
   -- No validation of userId, or check if the user exist 
 
 
+- http://localhost:8085/measurement - UPDATE A USER MEASUREMENT
+  -- POST REQUEST 
+  -- sample payload -> {
+  "user_id": 3,
+  "weight": 340,
+  "height": 200,
+  "body_fat": 10
+}
