@@ -12,6 +12,15 @@ func main() {
 	  // connect to the db 
 		dbconnection.InitDb()
 
+		// cors handle 
+		...
+e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+  AllowOrigins: []string{"*"},
+  AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+}))
+...
+
+
 		// custom middleware 
 		e.Use(handlers.LogRequest)
 
