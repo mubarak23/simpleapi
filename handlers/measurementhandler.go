@@ -4,6 +4,7 @@ import (
  	"simplefitapi/models"
 	"simplefitapi/repositories"
 	"net/http"
+	"strconv"
 	"github.com/labstack/echo/v4"
 )
 
@@ -36,4 +37,25 @@ func CreateMeasurement (c echo.Context) error {
 		}
 
 		return c.JSON(http.StatusCreated, newUserMeasurement)
+}
+
+func HandleUpdateMeasurement (c echo.Context) error {
+	id := c.Param("id")
+
+	idInt, err := strconv.Atoi(id)
+
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+
+	measurement := model.Measurements{}
+	c.Bind(&measurement)
+
+	updatedMeasurement, err := repositories.UpdateMeasurement(measurement, idInt)
+
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, updatedMeasurement)
 }

@@ -21,3 +21,22 @@ func CreateUserMeasurement (measurement model.Measurements) (model.Measurements,
 		}
 		return measurement, nil
 }
+
+func UpdateMeasurement (measurement model.Measurements, id int) (model.Measurements, error) {
+		db := dbconnection.GetDB()
+		sqlStatement := `
+			UPDATE measurements
+			SET weight = $2, height = $3, body_fat = $4, created_at = $5
+			WHERE id = $1
+			RETURNING id
+		`
+		err := db.QueryRow(sqlStatement, id, measurement.Weight, measurement.Height,
+		 measurement.BodyFat, time.Now()).Scan(&id)
+
+		 if err != nil {
+			return model.Measurements{}, err
+		 }
+
+		 measurement.Id = id
+		 return measurement, nil
+	} 
