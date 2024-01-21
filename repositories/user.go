@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"time"
 	 "simplefitapi/models"
 	"simplefitapi/dbconnection"
 )
@@ -40,3 +41,19 @@ func UpdateUser (user model.User, id int) (model.User, error) {
 	return user, nil
 	
 }
+
+// func AddNostrEvent (event model.Nostrevent) (model.Nostrevent, error) {
+// 	db := dbconnection.GetDB()
+
+// 	sqlStatement := `
+// 		INSERT INTO nostrevents (pubkey, kind, ptags, etags, gtags, expiration, content)
+// 	`
+// 	err := db.QueryRow(sqlStatement, event.PubKey, event.Kind, event.Ptags, event.Etags, event.Gtags, event.Expiration, event.Content).Scan(&event.Id)
+
+// 	if err != nil {
+// 		return event, err
+// 	}
+
+// 	return event, nil
+
+// }

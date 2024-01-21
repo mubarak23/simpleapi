@@ -66,6 +66,19 @@ func InitDb() {
 		panic(err.Error())
 	 }
 
+	 _, err = db.Exec(`CREATE TABLE IF NOT EXISTS nostrevents (
+		id SERIAL PRIMARY KEY,
+		pubkey INT NOT NULL,
+		kind VARCHAR(255) NOT NULL,
+		ptags VARCHAR(255) NULL,
+		etags VARCHAR(255) NULL,
+		gtags VARCHAR(255) NULL,
+		expiration TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    content VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	 )`)
+
+
 }
 
 func GetDB() *sql.DB {

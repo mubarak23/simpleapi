@@ -17,6 +17,8 @@ func main() {
 	 // Create a User routes
 	e.POST("/users", handlers.CreateUser)
 	e.POST("/measurement", handlers.CreateMeasurement)
+	e.PUT("/users/:id", handlers.HandleUpdateUser)
+	// e.POST("/event", handlers.SubmitEvent)
 
 	// create user measurment
 	// e.POST("/measurement", handlers.CreateUserMeasurement)
